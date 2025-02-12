@@ -70,3 +70,19 @@
   display: flex;
   align-items: center;
 }
+
+/* MemoryCard.css */
+.load-more-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+.load-more-btn:hover {
+  background-color: #45a049;
+}
