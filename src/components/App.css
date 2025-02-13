@@ -31,3 +31,7 @@
 .load-more-btn:hover {
   background-color: white;
 }
+
+.search-icon {
+  width: 50%;
+}

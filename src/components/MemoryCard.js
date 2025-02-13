@@ -1,11 +1,20 @@
 import React from "react";
 import "./MemoryCard.css";
+import search from "../assets/search.png";
 
 const MemoryCard = ({ memory }) => {
   return (
     <div className="memory-card">
-      {/* 이미지 */}
-      <img src={memory.imageUrl} alt={memory.title} className="memory-image" />
+      {/* 비공개일 경우 이미지를 숨김 */}
+      {memory.isPublic ? (
+        <img
+          src={memory.imageUrl}
+          alt={memory.title}
+          className="memory-image"
+        />
+      ) : (
+        <div className="hidden-image">🔒 비공개</div>
+      )}
 
       {/* 카드 내용 */}
       <div className="memory-content">
@@ -23,7 +32,7 @@ const MemoryCard = ({ memory }) => {
         {/* 해시태그 */}
         <div className="memory-tags">
           {memory.tags.map((tag, index) => (
-            <span key={index} className="tag">
+            <span src={search} key={index} className="tag">
               #{tag}
             </span>
           ))}
