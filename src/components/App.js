@@ -4,8 +4,9 @@ import dummyData from "../data/dummyData";
 import profile1 from "../assets/profile1.png";
 import moreImage from "../assets/more.png";
 import "./App.css";
-import "./Header";
 import Header from "./Header";
+import GroupInfo from "./GroupInfo";
+import GroupActions from "./GroupActions"; // ✅ 모달 관리 기능 포함
 
 const App = () => {
   const [memories, setMemories] = useState([]);
@@ -47,6 +48,8 @@ const App = () => {
   return (
     <div className="app-container">
       <Header />
+      <GroupInfo />
+      <GroupActions /> {/* ✅ 모달 버튼 포함 */}
       <h1 className="title">추억 목록</h1>
       {/* 공개/비공개 버튼 및 검색 입력 */}
       <div className="controls">
