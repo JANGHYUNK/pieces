@@ -4,6 +4,8 @@ import dummyData from "../data/dummyData";
 import profile1 from "../assets/profile1.png";
 import moreImage from "../assets/more.png";
 import "./App.css";
+import "./Header";
+import Header from "./Header";
 
 const App = () => {
   const [memories, setMemories] = useState([]);
@@ -44,8 +46,8 @@ const App = () => {
 
   return (
     <div className="app-container">
+      <Header />
       <h1 className="title">추억 목록</h1>
-
       {/* 공개/비공개 버튼 및 검색 입력 */}
       <div className="controls">
         <button
@@ -74,7 +76,6 @@ const App = () => {
         </select>
         <button onClick={() => addMemory(dummyData[0])}>추억 올리기</button>
       </div>
-
       {/* 추억 카드 리스트 */}
       <div className="memory-grid">
         {filteredMemories.slice(0, visibleCount).map((memory) => (
@@ -84,7 +85,6 @@ const App = () => {
           />
         ))}
       </div>
-
       {/* 더보기 버튼 */}
       {visibleCount < filteredMemories.length && (
         <div className="load-more-container">
