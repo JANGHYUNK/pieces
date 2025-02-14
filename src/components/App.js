@@ -49,7 +49,6 @@ const App = () => {
     <div className="app-container">
       <Header />
       <GroupInfo />
-      <GroupActions /> {/* ✅ 모달 버튼 포함 */}
       <h1 className="title">추억 목록</h1>
       {/* 공개/비공개 버튼 및 검색 입력 */}
       <div className="controls">
