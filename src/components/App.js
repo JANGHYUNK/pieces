@@ -6,7 +6,6 @@ import moreImage from "../assets/more.png";
 import "./App.css";
 import Header from "./Header";
 import GroupInfo from "./GroupInfo";
-import GroupActions from "./GroupActions"; // ✅ 모달 관리 기능 포함
 
 const App = () => {
   const [memories, setMemories] = useState([]);
