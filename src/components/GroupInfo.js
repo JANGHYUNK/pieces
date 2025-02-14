@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import "./GroupInfo.css";
 import profileImage from "../assets/profile.png";
+import flowerImage from "../assets/flower.png";
 import likeButton from "../assets/like_button.png";
+import GroupModify from "../modal/GroupModify"; // 그룹 수정 모달
+import GroupDelete from "../modal/GroupDelete"; // 그룹 삭제 모달
+
+const GroupActions = ({ onEdit, onDelete }) => {
+  return (
+    <div className="group-actions">
+      <button className="edit-button" onClick={onEdit}>
+        수정
+      </button>
+      <button className="delete-button" onClick={onDelete}>
+        삭제
+      </button>
+    </div>
+  );
+};
 
 const GroupInfo = () => {
+  const [isModifyOpen, setIsModifyOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
   const handleLikeClick = () => {
     alert("공감을 보냈습니다!");
   };
@@ -30,12 +49,25 @@ const GroupInfo = () => {
         </div>
       </div>
 
-      {/* 오른쪽 섹션: 공감 버튼 */}
+      {/* 오른쪽 섹션: 공감 버튼 및 수정/삭제 */}
       <div className="group-right">
-        <button className="like-button" onClick={handleLikeClick}>
-          <img src={likeButton} alt="공감 보내기" />
-        </button>
+        <GroupActions
+          onEdit={() => setIsModifyOpen(true)}
+          onDelete={() => setIsDeleteOpen(true)}
+        />
+        <div className="empathy-btn">
+          <img src={flowerImage} alt="공감" />
+          <button className="like-button" onClick={handleLikeClick}>
+            <img src={likeButton} alt="공감 보내기" />
+          </button>
+        </div>
       </div>
+
+      {/* 수정 모달 */}
+      {isModifyOpen && <GroupModify onClose={() => setIsModifyOpen(false)} />}
+
+      {/* 삭제 모달 */}
+      {isDeleteOpen && <GroupDelete onClose={() => setIsDeleteOpen(false)} />}
     </div>
   );
 };
