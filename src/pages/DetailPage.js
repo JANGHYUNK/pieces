@@ -1,3 +1,5 @@
+/* 현재 사용하지 않는페이지 나중에 컴포넌트를 모아서 DetailPage에 렌더링할것! */
+
 import React, { useState, useEffect } from "react";
 import EditGroupModal from "../components/EditGroupModal";
 import MemoryCard from "../components/MemoryCard";
