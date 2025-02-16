@@ -1,5 +1,5 @@
 .memory-card {
-  width: 300px;
+  width: 270px;
   border-radius: 15px;
   border: 2px solid #b085f5;
   padding: 10px;
@@ -113,7 +113,9 @@
 }
 
 .search-container {
-  margin-right: 10px;
+  margin-right: 20px;
+  width: 70%;
+  margin-top: 10px;
 }
 
 .search-container input {
@@ -142,6 +144,7 @@
 .controls button.active {
   background-color: #b085f5;
   color: white;
+  margin-left: 10px;
 }
 
 .controls select {

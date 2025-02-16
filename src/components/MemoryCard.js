@@ -112,7 +112,7 @@ const MemoryList = () => {
         <div className="search-container">
           <input
             type="text"
-            placeholder="태그 혹은 제목을 입력해주세요"
+            placeholder="  태그 혹은 제목을 입력해주세요"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
