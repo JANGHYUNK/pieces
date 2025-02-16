@@ -76,10 +76,11 @@ const MemoryList = () => {
   const addMemory = (newMemory) => {
     setMemories((prevMemories) => [newMemory, ...prevMemories]);
   };
-
   // 🔥 공개/비공개 필터 및 검색 적용
   const filteredMemories = memories
-    .filter((memory) => (filter === "public" ? memory.isPublic : true)) // 공개일 경우 공개된 것만 필터링
+    .filter(
+      (memory) => (filter === "public" ? memory.isPublic : !memory.isPublic) // ✅ 비공개일 때 비공개 글만 보이게 수정
+    )
     .filter(
       (memory) =>
         memory.title.includes(searchQuery) ||
