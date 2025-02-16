@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./GroupModify.css"; // 스타일 적용
 
 const GroupModify = ({ onClose }) => {
+  const [isPublic, setIsPublic] = useState(true); // 기본값: 공개
+
+  const toggleVisibility = () => {
+    setIsPublic((prev) => !prev);
+  };
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
@@ -18,8 +24,15 @@ const GroupModify = ({ onClose }) => {
 
         <label>그룹 공개 선택</label>
         <div className="toggle-switch">
-          <input type="checkbox" id="public-toggle" />
-          <label htmlFor="public-toggle"></label>
+          <input
+            type="checkbox"
+            id="public-toggle"
+            checked={isPublic}
+            onChange={toggleVisibility}
+          />
+          <label htmlFor="public-toggle" className="toggle-label">
+            {isPublic ? "공개" : "비공개"}
+          </label>
         </div>
 
         <label>수정 권한 인증</label>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./CardList.css";
 import profile1 from "../assets/profile1.png";
 
