@@ -45,7 +45,8 @@ const GroupInfo = () => {
           </p>
           <p className="group-description">{groupData.introduction}</p>
 
-          {/* 획득 배지 */}
+          {/* 🔹 획득 배지 */}
+          <h5 className="badge-title">획득 배지</h5>
           <div className="badges">
             {groupData.badges.map((badge, index) => (
               <img
