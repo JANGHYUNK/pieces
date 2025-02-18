@@ -7,7 +7,7 @@ const MemoryCard = ({ memory }) => {
     <div className="memory-card">
       {memory.isPublic ? (
         <img
-          //src={memory.imageUrl}
+          //src={memory.imageUrl}  // 나중에 이미지 받아올때
           src={profileImage}
           alt={memory.title}
           className="memory-image"
