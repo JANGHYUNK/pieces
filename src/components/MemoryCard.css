@@ -144,7 +144,6 @@
 .controls button.active {
   background-color: #b085f5;
   color: white;
-  margin-left: 10px;
 }
 
 .controls select {

@@ -1,0 +1,102 @@
+.memory-header {
+  display: flex;
+  flex-direction: column; /* 제목을 위에, 버튼을 아래 배치 */
+  align-items: center;
+  margin-bottom: 20px;
+  white-space: nowrap; /* 줄바꿈 방지 */
+}
+.memory-info {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 닉네임과 공개 상태 사이 간격 */
+  font-size: 16px;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.divider {
+  font-weight: bold;
+}
+
+.visibility {
+  color: gray;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* 버튼 및 검색창을 가로 정렬 */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px; /* 버튼 간격 */
+  width: 100%;
+  max-width: 900px;
+}
+
+.controls button {
+  background-color: #fff;
+  border: 2px solid #000;
+  color: #000;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.controls button.active {
+  background-color: #000;
+  color: white;
+}
+
+.search-container {
+  flex-grow: 1;
+  position: relative;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.search-container input::placeholder {
+  color: #aaa;
+}
+
+.sort-container {
+  display: flex;
+  align-items: center;
+}
+
+.sort-container select {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-left: 10px;
+}
+
+.upload-btn {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.upload-btn:hover {
+  background-color: #333;
+}
