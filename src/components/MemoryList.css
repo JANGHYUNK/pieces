@@ -100,3 +100,30 @@
 .upload-btn:hover {
   background-color: #333;
 }
+
+/* 🔹 추억 없음 섹션 */
+.empty-memory {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.block-img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 8px;
+}
+
+.empty-text {
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+}
+
+.empty-subtext {
+  font-size: 14px;
+  color: #777;
+}
