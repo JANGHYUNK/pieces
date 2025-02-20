@@ -1,7 +1,7 @@
 import React from "react";
 import "./MemoryList.css";
 
-const MemoryHeader = ({
+const MemoryListHeader = ({
   filter,
   setFilter,
   searchQuery,
@@ -55,4 +55,4 @@ const MemoryHeader = ({
   );
 };
 
-export default MemoryHeader;
+export default MemoryListHeader;
