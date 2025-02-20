@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./GroupInfo.css";
 import flowerImage from "../assets/flower.png";
 import likeButton from "../assets/like_button.png";
@@ -6,7 +7,8 @@ import Modify from "../modal/GroupModify"; // 수정 모달
 import GroupDelete from "../modal/GroupDelete"; // 삭제 모달
 import BadgeData from "../data/badgeData"; // 데이터 import
 import MemoryList from "./MemoryList";
-import Header from "./Header";
+//import Header from "./Header";
+import logo from "../assets/logo.png";
 
 const GroupInfo = () => {
   const [groupData, setGroupData] = useState(null);
@@ -23,7 +25,12 @@ const GroupInfo = () => {
 
   return (
     <>
-      <Header />
+      <header className="header">
+        <Link to="/">
+          <img src={logo} alt="조각집 로고" className="logo" />
+        </Link>
+      </header>
+
       <div className="group-container">
         {/* 왼쪽 섹션: 대표 이미지 및 그룹 정보 */}
         <div className="group-left">
