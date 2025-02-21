@@ -1,0 +1,32 @@
+.container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+.createButton {
+    width: 400px;
+    height: 50px;
+    border-radius: 6px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}  

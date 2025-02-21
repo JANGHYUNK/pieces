@@ -1,11 +1,16 @@
 .header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 20px 0;
+    display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center;     /* 수직 중앙 정렬 */
+    height: 100px;
 }
 
-.logo {
-  height: 40px; /* 필요에 따라 크기 조절 */
+.logoImg {
+    justify-content: center;
+    align-items: center;
+    width: 137px;
+    height: 48px;
 }
+
+
+  
