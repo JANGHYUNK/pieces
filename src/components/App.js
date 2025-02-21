@@ -27,7 +27,10 @@ function App() {
         <Route path="/empty-public" element={<EmptyPublicGroupListPage />} />
         <Route path="/groups/:groupId" element={<GroupInfoPage />} />
 
-        <Route path="/groups/posts/create" element={<MemoryCreatePage />} />
+        <Route
+          path="/groups/:groupId/posts/create"
+          element={<MemoryCreatePage />}
+        />
         {/*"/groups/:groupId/posts/create"*/}
         <Route
           path="/groups/posts/:postId/access"
