@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import MemoryHeader from "./MemoryListHeader";
 import MemoryCardList from "./MemoryCardList";
 import "./MemoryList.css";
 
-const MemoryList = ({ groupId }) => {
-  const [filter, setFilter] = useState("public");
+const MemoryList = () => {
+  const { groupId } = useParams();
+  const [filter, setFilter] = useState("all"); // 🔥 기본값을 "all"로 변경
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOrder, setSortOrder] = useState("latest");
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
   const navigate = useNavigate();
 
   const addMemory = () => {
-    navigate("/groups/posts/create");
+    navigate(`/groups/${groupId}/posts/create`);
   };
 
-  // Debouncing the search query to avoid unnecessary API calls
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setDebouncedSearchQuery(searchQuery);
-    }, 500); // 500ms delay before updating the debounced search query
+    }, 500);
 
-    return () => clearTimeout(timeoutId); // Cleanup on component unmount or searchQuery change
+    return () => clearTimeout(timeoutId);
   }, [searchQuery]);
 
   return (
@@ -37,7 +37,7 @@ const MemoryList = ({ groupId }) => {
       <MemoryCardList
         groupId={groupId}
         filter={filter}
-        searchQuery={debouncedSearchQuery} // Using the debounced value
+        searchQuery={debouncedSearchQuery}
         sortOrder={sortOrder}
       />
     </div>

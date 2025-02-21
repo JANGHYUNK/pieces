@@ -8,8 +8,10 @@ const App = () => {
   return (
     <Routes>
       <Route path="/groups/:groupId" element={<GroupInfo />} />
-      <Route path="/groups/posts/create" element={<MemoryCreatePage />} />
-      {/*"/groups/:groupId/posts/create"*/}
+      <Route
+        path="/groups/:groupId/posts/create"
+        element={<MemoryCreatePage />}
+      />
       <Route path="/groups/posts/:id" element={<PostDetail />} />
     </Routes>
   );

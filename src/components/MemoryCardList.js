@@ -2,24 +2,26 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MemoryCard from "./MemoryCard";
 import "./MemoryList.css";
-import api from "../api/api"; // axios API 파일 불러오기
+import api from "../api/api";
 import moreImage from "../assets/more.png";
 import blockImage from "../assets/block.png";
 
 const MemoryCardList = ({ groupId, filter, searchQuery, sortOrder }) => {
   const [memories, setMemories] = useState([]);
   const [visibleCount, setVisibleCount] = useState(16);
-  const [loading, setLoading] = useState(true); // 로딩 상태 추가
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMemories = async () => {
+      console.log(`Fetching memories for groupId: ${groupId}`);
       try {
         setLoading(true);
         const response = await api.get(`/api/groups/${groupId}/posts`);
+        console.log("API 응답 데이터:", response.data);
 
-        // 수정된 부분: response.data.data로 추억 데이터를 가져옴
-        setMemories(response.data.data);
+        const data = response.data?.data || [];
+        setMemories(data);
       } catch (error) {
         console.error("추억 데이터를 불러오는 데 실패했습니다.", error);
       } finally {
@@ -28,7 +30,7 @@ const MemoryCardList = ({ groupId, filter, searchQuery, sortOrder }) => {
     };
 
     fetchMemories();
-  }, [groupId]); // groupId가 바뀔 때마다 실행
+  }, [groupId]);
 
   const loadMore = () => {
     setVisibleCount((prevCount) => prevCount + 4);
@@ -41,26 +43,27 @@ const MemoryCardList = ({ groupId, filter, searchQuery, sortOrder }) => {
       .padStart(2, "0")}.${date.getDate().toString().padStart(2, "0")}`;
   };
 
-  // `memories`가 배열인지 확인한 후 필터링 및 정렬을 수행
-  const filteredMemories = Array.isArray(memories)
-    ? memories
-        .filter((memory) =>
-          filter === "public" ? memory.isPublic : !memory.isPublic
-        )
-        .filter(
-          (memory) =>
-            memory.title.includes(searchQuery) ||
-            memory.tags.some((tag) => tag.includes(searchQuery))
-        )
-        .sort((a, b) =>
-          sortOrder === "latest"
-            ? new Date(b.createdAt) - new Date(a.createdAt)
-            : b.likeCount - a.likeCount
-        )
-    : [];
+  // 🔥 필터링 로직 수정 (기본값: "all"일 경우 전체 표시)
+  const filteredMemories = memories
+    .filter((memory) => {
+      console.log(`메모리 ${memory.id} 공개 여부:`, memory.isPublic);
+      if (filter === "public") return memory.isPublic === true;
+      if (filter === "private") return memory.isPublic === false;
+      return true; // 🔥 "all"일 경우 모든 데이터 표시
+    })
+    .filter(
+      (memory) =>
+        memory.title.includes(searchQuery) ||
+        memory.tags.some((tag) => tag.includes(searchQuery))
+    )
+    .sort((a, b) =>
+      sortOrder === "latest"
+        ? new Date(b.createdAt) - new Date(a.createdAt)
+        : b.likeCount - a.likeCount
+    );
 
   if (loading) {
-    return <div>로딩 중...</div>; // 로딩 상태
+    return <div>로딩 중...</div>;
   }
 
   return (
@@ -77,7 +80,7 @@ const MemoryCardList = ({ groupId, filter, searchQuery, sortOrder }) => {
             {filteredMemories.slice(0, visibleCount).map((memory) => (
               <div
                 key={memory.id}
-                onClick={() => navigate(`/groups/posts/${memory.id}`)} // 백틱 사용하여 수정
+                onClick={() => navigate(`/groups/posts/${memory.id}`)}
                 style={{ cursor: "pointer" }}
               >
                 <MemoryCard

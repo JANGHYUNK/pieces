@@ -17,8 +17,7 @@ const MemoryCard = ({ memory }) => {
       <div className="memory-content">
         <div className="memory-header">
           <div className="memory-info">
-            <span className="nickname">{memory.nickname}</span>{" "}
-            {/* 수정된 부분 */}
+            <span className="nickname">{memory.nickname}</span>
             <span className="divider">|</span>
             <span className="visibility">
               {memory.isPublic ? "공개" : "비공개"}
@@ -31,7 +30,7 @@ const MemoryCard = ({ memory }) => {
         <div className="memory-tags">
           {memory.tags.map((tag, index) => (
             <span key={index} className="tag">
-              #{tag}
+              {tag.tagName} {/* 🔥 객체에서 tagName을 올바르게 추출 */}
             </span>
           ))}
         </div>
