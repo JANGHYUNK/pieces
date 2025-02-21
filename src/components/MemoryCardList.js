@@ -2,21 +2,43 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MemoryCard from "./MemoryCard";
 import "./MemoryList.css";
-import dummyData from "../data/dummyData";
+import api from "../api/api"; // axios API 파일 불러오기
 import moreImage from "../assets/more.png";
 import blockImage from "../assets/block.png";
 
-const MemoryCardList = ({ filter, searchQuery, sortOrder }) => {
+const MemoryCardList = ({ groupId, filter, searchQuery, sortOrder }) => {
   const [memories, setMemories] = useState([]);
   const [visibleCount, setVisibleCount] = useState(16);
+  const [loading, setLoading] = useState(true); // 로딩 상태 추가
   const navigate = useNavigate();
 
   useEffect(() => {
-    setMemories(dummyData); // 더미 데이터 할당
-  }, []);
+    const fetchMemories = async () => {
+      try {
+        setLoading(true);
+        const response = await api.get(
+          `/api/groups/${groupId}/memories` // 환경에 맞게 URL 수정
+        );
+        setMemories(response.data);
+      } catch (error) {
+        console.error("추억 데이터를 불러오는 데 실패했습니다.", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMemories();
+  }, [groupId]); // groupId가 바뀔 때마다 실행
 
   const loadMore = () => {
     setVisibleCount((prevCount) => prevCount + 4);
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return `${date.getFullYear()}.${(date.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}.${date.getDate().toString().padStart(2, "0")}`;
   };
 
   const filteredMemories = memories
@@ -34,9 +56,12 @@ const MemoryCardList = ({ filter, searchQuery, sortOrder }) => {
         : b.likeCount - a.likeCount
     );
 
+  if (loading) {
+    return <div>로딩 중...</div>; // 로딩 상태
+  }
+
   return (
     <div>
-      {/* 🔹 추억이 없을 경우 */}
       {filteredMemories.length === 0 ? (
         <div className="empty-memory">
           <img src={blockImage} alt="게시된 추억 없음" className="block-img" />
@@ -45,20 +70,23 @@ const MemoryCardList = ({ filter, searchQuery, sortOrder }) => {
         </div>
       ) : (
         <>
-          {/* 🔹 게시물 목록 */}
           <div className="memory-grid">
             {filteredMemories.slice(0, visibleCount).map((memory) => (
               <div
                 key={memory.id}
-                onClick={() => navigate(`/groups/posts/${memory.id}`)} // ✅ 클릭 시 이동
-                style={{ cursor: "pointer" }} // 클릭 가능하도록 커서 변경
+                onClick={() => navigate(`/groups/posts/${memory.id}`)} // 백틱 사용하여 수정
+                style={{ cursor: "pointer" }}
               >
-                <MemoryCard memory={memory} />
+                <MemoryCard
+                  memory={{
+                    ...memory,
+                    createdAt: formatDate(memory.createdAt),
+                  }}
+                />
               </div>
             ))}
           </div>
 
-          {/* 🔹 더보기 버튼 */}
           {visibleCount < filteredMemories.length && (
             <div className="load-more-container">
               <button onClick={loadMore} className="load-more-btn">

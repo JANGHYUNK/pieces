@@ -1,14 +1,13 @@
 import React from "react";
 import "./MemoryCard.css";
-import profileImage from "../assets/profile1.png";
+//import profileImage from "../assets/profile1.png";
 
 const MemoryCard = ({ memory }) => {
   return (
     <div className="memory-card">
       {memory.isPublic ? (
         <img
-          //src={memory.imageUrl}  // 나중에 이미지 받아올때
-          src={profileImage}
+          src={memory.imageUrl} // 나중에 이미지 받아올때
           alt={memory.title}
           className="memory-image"
         />

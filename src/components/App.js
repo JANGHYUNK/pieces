@@ -7,7 +7,7 @@ import MemoryCreatePage from "../pages/CreateGroupPage";
 const App = () => {
   return (
     <Routes>
-      <Route path="/group/info" element={<GroupInfo />} />
+      <Route path="/groups/:groupId" element={<GroupInfo />} />
       <Route path="/groups/posts/create" element={<MemoryCreatePage />} />
       {/*"/groups/:groupId/posts/create"*/}
       <Route path="/groups/posts/:id" element={<PostDetail />} />
