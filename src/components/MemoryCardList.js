@@ -16,10 +16,10 @@ const MemoryCardList = ({ groupId, filter, searchQuery, sortOrder }) => {
     const fetchMemories = async () => {
       try {
         setLoading(true);
-        const response = await api.get(
-          `/api/groups/${groupId}/memories` // 환경에 맞게 URL 수정
-        );
-        setMemories(response.data);
+        const response = await api.get(`/api/groups/${groupId}/posts`);
+
+        // 수정된 부분: response.data.data로 추억 데이터를 가져옴
+        setMemories(response.data.data);
       } catch (error) {
         console.error("추억 데이터를 불러오는 데 실패했습니다.", error);
       } finally {
@@ -41,20 +41,23 @@ const MemoryCardList = ({ groupId, filter, searchQuery, sortOrder }) => {
       .padStart(2, "0")}.${date.getDate().toString().padStart(2, "0")}`;
   };
 
-  const filteredMemories = memories
-    .filter((memory) =>
-      filter === "public" ? memory.isPublic : !memory.isPublic
-    )
-    .filter(
-      (memory) =>
-        memory.title.includes(searchQuery) ||
-        memory.tags.some((tag) => tag.includes(searchQuery))
-    )
-    .sort((a, b) =>
-      sortOrder === "latest"
-        ? new Date(b.createdAt) - new Date(a.createdAt)
-        : b.likeCount - a.likeCount
-    );
+  // `memories`가 배열인지 확인한 후 필터링 및 정렬을 수행
+  const filteredMemories = Array.isArray(memories)
+    ? memories
+        .filter((memory) =>
+          filter === "public" ? memory.isPublic : !memory.isPublic
+        )
+        .filter(
+          (memory) =>
+            memory.title.includes(searchQuery) ||
+            memory.tags.some((tag) => tag.includes(searchQuery))
+        )
+        .sort((a, b) =>
+          sortOrder === "latest"
+            ? new Date(b.createdAt) - new Date(a.createdAt)
+            : b.likeCount - a.likeCount
+        )
+    : [];
 
   if (loading) {
     return <div>로딩 중...</div>; // 로딩 상태

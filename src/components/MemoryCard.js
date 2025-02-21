@@ -1,13 +1,12 @@
 import React from "react";
 import "./MemoryCard.css";
-//import profileImage from "../assets/profile1.png";
 
 const MemoryCard = ({ memory }) => {
   return (
     <div className="memory-card">
       {memory.isPublic ? (
         <img
-          src={memory.imageUrl} // 나중에 이미지 받아올때
+          src={memory.imageUrl}
           alt={memory.title}
           className="memory-image"
         />
@@ -18,7 +17,8 @@ const MemoryCard = ({ memory }) => {
       <div className="memory-content">
         <div className="memory-header">
           <div className="memory-info">
-            <span className="nickname">{memory.name}</span>
+            <span className="nickname">{memory.nickname}</span>{" "}
+            {/* 수정된 부분 */}
             <span className="divider">|</span>
             <span className="visibility">
               {memory.isPublic ? "공개" : "비공개"}

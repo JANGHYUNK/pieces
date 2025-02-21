@@ -1,3 +1,5 @@
+// GroupInfo.js에서 MemoryList 추가
+
 import React, { useState, useEffect, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 import api from "../api/api"; // API 요청 파일
@@ -6,7 +8,7 @@ import flowerImage from "../assets/flower.png";
 import likeButton from "../assets/like_button.png";
 import Modify from "../modal/GroupModify"; // 수정 모달
 import GroupDelete from "../modal/GroupDelete"; // 삭제 모달
-import MemoryList from "./MemoryList";
+import MemoryList from "./MemoryList"; // MemoryList 컴포넌트 추가
 import logo from "../assets/logo.png";
 import badge1 from "../assets/badge1.png";
 import badge2 from "../assets/badge2.png";
@@ -40,7 +42,7 @@ const GroupInfo = () => {
     }
   }, [groupId]); // 의존성 배열에 groupId 추가
 
-  // 게시글 목록 가져오기
+  // 게시글 목록을 가져오는 fetchPosts 함수
   const fetchPosts = useCallback(async () => {
     try {
       const response = await api.get(`/api/groups/${groupId}/posts`);
@@ -48,7 +50,10 @@ const GroupInfo = () => {
     } catch (error) {
       console.error("게시글 목록을 불러오는 중 오류 발생:", error);
     }
-  }, [groupId]); // groupId 의존성 추가
+  }, [groupId]);
+
+  // 컴포넌트 렌더링 시 MemoryList 컴포넌트에 posts 전달
+  <MemoryList posts={posts} />;
 
   // 컴포넌트가 마운트될 때 그룹 정보와 게시글 목록을 가져옴
   useEffect(() => {
@@ -157,7 +162,7 @@ const GroupInfo = () => {
           />
         )}
       </div>
-      <MemoryList posts={posts} /> {/* 게시글 목록을 MemoryList에 전달 */}
+      <MemoryList groupId={groupId} /> {/* MemoryList 컴포넌트 추가 */}
     </>
   );
 };
